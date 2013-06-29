@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
-        <title>Foundation 4</title>
+        <title>Le Grand Moulin</title>
 
 
         <link rel="stylesheet" href="css/foundation.css" />
@@ -18,7 +18,7 @@
         <nav class="top-bar">
             <ul class="title-area">
                 <li class="name">
-                    <h1><a href="#">LE GRAND MOULIN</a></h1>
+                    <h1><a href="#">Le Grand Moulin</a></h1>
                 </li>
                 <section class="top-bar-section">
                     <ul class="left">
