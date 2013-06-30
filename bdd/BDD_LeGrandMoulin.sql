@@ -82,7 +82,6 @@ CREATE TABLE platRestaurant(
         idPlat              int (11) Auto_increment  NOT NULL ,
         libellePlat         Varchar (255) NOT NULL ,
         prixPlat            Double NOT NULL ,
-        idTypePlat          Int NOT NULL ,
         idTypePlat_typePlat Int NOT NULL ,
         PRIMARY KEY (idPlat )
 )ENGINE=InnoDB;
