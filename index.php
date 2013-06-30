@@ -8,7 +8,6 @@ echo getEntete();
 echo getMenu();
 ?>
         
-        
         <div class="row">
             <div class="large-12 columns">
                 <h2>Welcome to Foundation</h2>
