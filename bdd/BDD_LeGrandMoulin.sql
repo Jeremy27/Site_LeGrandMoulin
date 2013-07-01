@@ -4,7 +4,7 @@
 
 
 CREATE TABLE menuSite(
-        idOnglet   Int NOT NULL ,
+        idOnglet   int (11) Auto_increment  NOT NULL ,
         nomOnglet  Varchar (15) NOT NULL ,
         LienOnglet Varchar (255) NOT NULL ,
         PRIMARY KEY (idOnglet )
@@ -12,7 +12,7 @@ CREATE TABLE menuSite(
 
 
 CREATE TABLE reservation(
-        idReservation     Int NOT NULL ,
+        idReservation     int (11) Auto_increment  NOT NULL ,
         civilite          Varchar (3) NOT NULL ,
         nom               Varchar (30) NOT NULL ,
         prenom            Varchar (30) NOT NULL ,
@@ -35,6 +35,7 @@ CREATE TABLE chambre(
         informationsChambre Varchar (255) ,
         capaciteChambre     Int ,
         wc                  Varchar (50) NOT NULL ,
+        sdb                 Varchar (25) ,
         PRIMARY KEY (idChambre )
 )ENGINE=InnoDB;
 
@@ -64,7 +65,7 @@ CREATE TABLE utilisateur(
 
 
 CREATE TABLE groupeUtilisateur(
-        idGroupe      Int NOT NULL ,
+        idGroupe      int (11) Auto_increment  NOT NULL ,
         libelleGroupe Varchar (25) NOT NULL ,
         PRIMARY KEY (idGroupe )
 )ENGINE=InnoDB;
@@ -88,7 +89,7 @@ CREATE TABLE platRestaurant(
 
 
 CREATE TABLE typePlat(
-        idTypePlat      Int NOT NULL ,
+        idTypePlat      int (11) Auto_increment  NOT NULL ,
         libelleTypePlat Varchar (255) ,
         PRIMARY KEY (idTypePlat )
 )ENGINE=InnoDB;
@@ -109,7 +110,7 @@ CREATE TABLE prixChambre(
 )ENGINE=InnoDB;
 
 
-CREATE TABLE posseder(
+CREATE TABLE platFormuleRestaurant(
         idPlat_platRestaurant       Int NOT NULL ,
         idFormule_formuleRestaurant Int NOT NULL ,
         PRIMARY KEY (idPlat_platRestaurant ,idFormule_formuleRestaurant )
@@ -130,7 +131,7 @@ ALTER TABLE chambreOption ADD CONSTRAINT FK_chambreOption_idOption_optionHotel F
 ALTER TABLE chambreOption ADD CONSTRAINT FK_chambreOption_idChambre_chambre FOREIGN KEY (idChambre_chambre) REFERENCES chambre(idChambre);
 ALTER TABLE prixChambre ADD CONSTRAINT FK_prixChambre_idChambre_chambre FOREIGN KEY (idChambre_chambre) REFERENCES chambre(idChambre);
 ALTER TABLE prixChambre ADD CONSTRAINT FK_prixChambre_idType_typeSejour FOREIGN KEY (idType_typeSejour) REFERENCES typeSejour(idType);
-ALTER TABLE posseder ADD CONSTRAINT FK_posseder_idPlat_platRestaurant FOREIGN KEY (idPlat_platRestaurant) REFERENCES platRestaurant(idPlat);
-ALTER TABLE posseder ADD CONSTRAINT FK_posseder_idFormule_formuleRestaurant FOREIGN KEY (idFormule_formuleRestaurant) REFERENCES formuleRestaurant(idFormule);
+ALTER TABLE platFormuleRestaurant ADD CONSTRAINT FK_platFormuleRestaurant_idPlat_platRestaurant FOREIGN KEY (idPlat_platRestaurant) REFERENCES platRestaurant(idPlat);
+ALTER TABLE platFormuleRestaurant ADD CONSTRAINT FK_platFormuleRestaurant_idFormule_formuleRestaurant FOREIGN KEY (idFormule_formuleRestaurant) REFERENCES formuleRestaurant(idFormule);
 ALTER TABLE reservationOptionHotel ADD CONSTRAINT FK_reservationOptionHotel_idReservation_reservation FOREIGN KEY (idReservation_reservation) REFERENCES reservation(idReservation);
 ALTER TABLE reservationOptionHotel ADD CONSTRAINT FK_reservationOptionHotel_idOption_optionHotel FOREIGN KEY (idOption_optionHotel) REFERENCES optionHotel(idOption);
