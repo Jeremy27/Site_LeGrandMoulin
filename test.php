@@ -43,19 +43,21 @@ function testClasseBaseDeDonnes()
 /* ------------------------------------------------- Fonction test classe Utilisateur ------------------------------------------------- */
 function testClasseUtilisateur()
 {
-    // Test de la création des utilisateurs
-    $utilisateur1 = new Utilisateur(1);
+//    // Test de la création des utilisateurs
+//    $utilisateur1 = new Utilisateur(1);
 //    print_r($utilisateur1);
 //    $utilisateur2 = new Utilisateur('mathieu', 'mdp');
 //    print_r($utilisateur2);
-    
-    // Ajout de l'utilisateur dans la base de données
-    //$utilisateur2->ajouterUtilisateur();
-    
-    // Modification de l'utilisateur dans la base de données
-    $utilisateur1->setLoginUtilisateur('Mathieu');
-    $utilisateur1->modifierUtilisateur();
-    
+//    
+//    // Ajout de l'utilisateur dans la base de données
+//    $utilisateur2->ajouterUtilisateur();
+//    
+//    // Modification de l'utilisateur dans la base de données
+//    $utilisateur1->setLoginUtilisateur('Mathieu');
+//    $utilisateur1->modifierUtilisateur();
+//    
+//    // Suppression de l'utilisateur
+//    $utilisateur1->supprimerUtilisateur();
     
     
 }
