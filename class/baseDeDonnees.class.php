@@ -57,19 +57,19 @@ class baseDeDonnees
     public function modifier($requete, $tabParametres)
     {
         $requetePreparee = $this->m_connexion->prepare($requete);
-        $requetePreparee->execute($tabParametres);
-        $ligne = $requetePreparee->fetch();
-        
-        return $ligne[0];
+        return $requetePreparee->execute($tabParametres);
     }
   
     public function supprimer($requete, $tabParametres)
     {
         $requetePreparee = $this->m_connexion->prepare($requete);
-        $requetePreparee->execute($tabParametres);
-        $ligne = $requetePreparee->fetch();
-        
-        return $ligne[0];
+        return $requetePreparee->execute($tabParametres);
+    }
+  
+    public function ajouter($requete, $tabParametres)
+    {
+        $requetePreparee = $this->m_connexion->prepare($requete);
+        return $requetePreparee->execute($tabParametres);
     }
 }
 
