@@ -38,9 +38,9 @@ class BaseDeDonnees
     /**
      * Cette méthode prend en paramètres la requête à executer et le tableau de paramètre pour la requête préparée, elle est utilisée pour 
      * lire des données dans la base de donnnées
-     * @param String $requete : ce paramètre correspond à la requête au format préparé (contenant donc des `?`)
-     * @param array $tabParametres : ce paramètre correspond aux valeur à insérer dans la requête préparée
-     * @return array : un tableau multidimensionnel contenant les resultats de la requete
+     * @param String $requete ce paramètre correspond à la requête au format préparé (contenant donc des `?`)
+     * @param array $tabParametres ce paramètre correspond aux valeur à insérer dans la requête préparée
+     * @return array un tableau multidimensionnel contenant les resultats de la requete
      */
     public function selection($requete, $tabParametres)
     {
@@ -56,10 +56,10 @@ class BaseDeDonnees
   
     /**
      * Cette méthode prend en paramètres la requête à executer et le tableau de paramètre pour la requête préparée, elle est utilisée pour 
-     * ajouter un élément déjà existant dans la bdd
-     * @param String $requete : ce paramètre correspond à la requête au format préparé (contenant donc des `?`)
-     * @param array $tabParametres : ce paramètre correspond aux valeur à insérer dans la requête préparée
-     * @return boolean : retourne TRUE ou FALSE en fonction de si la requete s'est bien passée ou pas
+     * ajouter un élément dans la bdd
+     * @param String $requete ce paramètre correspond à la requête au format préparé (contenant donc des `?`)
+     * @param array $tabParametres ce paramètre correspond aux valeur à insérer dans la requête préparée
+     * @return boolean retourne TRUE ou FALSE en fonction de si la requete s'est bien passée ou pas
      */
     public function ajouter($requete, $tabParametres)
     {
@@ -70,9 +70,9 @@ class BaseDeDonnees
     /**
      * Cette méthode prend en paramètres la requête à executer et le tableau de paramètre pour la requête préparée, elle est utilisée pour 
      * modifier un élément déjà existant dans la bdd
-     * @param String $requete : ce paramètre correspond à la requête au format préparé (contenant donc des `?`)
-     * @param array $tabParametres : ce paramètre correspond aux valeur à insérer dans la requête préparée
-     * @return boolean : retourne TRUE ou FALSE en fonction de si la requete s'est bien passée ou pas
+     * @param String $requete ce paramètre correspond à la requête au format préparé (contenant donc des `?`)
+     * @param array $tabParametres ce paramètre correspond aux valeur à insérer dans la requête préparée
+     * @return boolean retourne TRUE ou FALSE en fonction de si la requete s'est bien passée ou pas
      */
     public function modifier($requete, $tabParametres)
     {
@@ -83,9 +83,9 @@ class BaseDeDonnees
     /**
      * Cette méthode prend en paramètres la requête à executer et le tableau de paramètre pour la requête préparée, elle est utilisée pour 
      * supprimer un élément existant dans la bdd
-     * @param String $requete : ce paramètre correspond à la requête au format préparé (contenant donc des `?`)
-     * @param array $tabParametres : ce paramètre correspond aux valeur à insérer dans la requête préparée
-     * @return boolean : retourne TRUE ou FALSE en fonction de si la requete s'est bien passée ou pas
+     * @param String $requete ce paramètre correspond à la requête au format préparé (contenant donc des `?`)
+     * @param array $tabParametres ce paramètre correspond aux valeur à insérer dans la requête préparée
+     * @return boolean retourne TRUE ou FALSE en fonction de si la requete s'est bien passée ou pas
      */
     public function supprimer($requete, $tabParametres)
     {
