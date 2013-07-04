@@ -24,13 +24,13 @@ class ChambreOption
     
     /**
      * Cette méthode vérifie si l'association a déjà été créée dans la bdd
-     * @return boolean TRUE si l'association existe déjà, FALSE sinno
+     * @return boolean TRUE si l'association existe déjà, FALSE sinon
      */
     function existeDeja()
     {
-        $requete        = 'SELECT * FROM chanbreOption WHERE idOption_optionHotel = ? AND idChambre_chambre = ?';
+        $requete        = 'SELECT * FROM chambreOption WHERE idOption_optionHotel = ? AND idChambre_chambre = ?';
         $tabParametres  = array($this->m_optionHotel->getId(), $this->m_chambre->getId());
-        $tabResultat    =  $this->m_bdd->selection($requete, $tabParametres);
+        $tabResultat    = $this->m_bdd->selection($requete, $tabParametres);
         if(empty($tabResultat))
             return FALSE;
         return TRUE;
