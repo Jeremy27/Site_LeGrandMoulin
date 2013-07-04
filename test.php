@@ -20,6 +20,10 @@ $tab = $bdd->selection("select * from utilisateur", $tabParametres);
 //echo $bdd->modifier("insert into utilisateur values (\"\", ?, ?, ?)", $tabParametres2);
 
 
+// Moi
+// ChambreOption
+// PlatFormuleRestaurant
+
 $tabParametres3 = array();
 array_push($tabParametres3, 33);
 echo $bdd->supprimer("delete from utilisateur where idUtilisateur = ?", $tabParametres3);
