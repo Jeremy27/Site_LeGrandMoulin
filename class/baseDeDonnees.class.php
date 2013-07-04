@@ -10,7 +10,7 @@
  *
  * @author mathieu
  */
-class baseDeDonnees
+class BaseDeDonnees
 {
     private $m_nomBdd           = 'LeGrandMoulin';
     private $m_hoteBdd          = 'localhost';
@@ -54,6 +54,12 @@ class baseDeDonnees
         return $tableau;
     }
     
+    public function ajouter($requete, $tabParametres)
+    {
+        $requetePreparee = $this->m_connexion->prepare($requete);
+        return $requetePreparee->execute($tabParametres);
+    }
+    
     public function modifier($requete, $tabParametres)
     {
         $requetePreparee = $this->m_connexion->prepare($requete);
@@ -65,12 +71,8 @@ class baseDeDonnees
         $requetePreparee = $this->m_connexion->prepare($requete);
         return $requetePreparee->execute($tabParametres);
     }
-  
-    public function ajouter($requete, $tabParametres)
-    {
-        $requetePreparee = $this->m_connexion->prepare($requete);
-        return $requetePreparee->execute($tabParametres);
-    }
+    
+    
 }
 
 ?>
