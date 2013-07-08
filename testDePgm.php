@@ -93,6 +93,52 @@ function testClasseChambre()
     echo '###### FIN DU TEST ######<br/>';
 }
 
-testClasseChambre();
+//testClasseChambre();
+//------------------------------------------------------------------------------------------------------------------------//
+
+
+
+//----------------------------------------Vérifications de la classe TypeSejour----------------------------------------//
+include_once 'class/typeSejour.class.php';
+
+function ajoutTypeSejour($typeSejour)
+{
+    if($typeSejour->ajouterTypeSejour())
+        echo 'Ajout : GOOD<br/>';
+    else
+        echo 'Ajout : PAS GOOD<br/>';
+}
+
+function modifierTypeSejour($typeSejour)
+{
+    $typeSejour->setLibelleType("Sejour de ouf");
+    
+    if($typeSejour->modifierTypeSejour())
+        echo 'Modification : GOOD<br/>';
+    else
+        echo 'Modification : PAS GOOD<br/>';
+}
+
+function supprimerTypeSejour($typeSejour)
+{
+    if($typeSejour->supprimerTypeSejour())
+        echo 'Suppression : GOOD<br/>';
+    else
+        echo 'Suppression : PAS GOOD<br/>';
+}
+
+function testClasseTypeSejour()
+{
+    echo '###### TEST TYPE SEJOUR ######<br/>';
+    $typeSejour = new TypeSejour("Sejour de noob");
+    ajoutTypeSejour($typeSejour);
+    echo $typeSejour;
+    modifierTypeSejour($typeSejour);
+    echo $typeSejour;
+    supprimerTypeSejour($typeSejour);
+    echo '###### FIN DU TEST ######<br/>';
+}
+
+testClasseTypeSejour();
 //------------------------------------------------------------------------------------------------------------------------//
 ?>
