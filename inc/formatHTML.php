@@ -28,7 +28,7 @@ function getMenu()
         <nav class="top-bar">
             <ul class="title-area">
                 <li class="name">
-                    <h1><a href="#">Le Grand Moulin</a></h1>
+                    <a href="#"><img src="img/LGM.png" alt="Smiley face" width="240"/></a>
                 </li>
                 <section class="top-bar-section">
                     <ul class="left">
@@ -46,7 +46,7 @@ function getMenu()
                     </ul>
                 </section>
             </ul>
-        </nav>';
+        </nav> ';
     return $menu;
 }
 
