@@ -1,5 +1,7 @@
 <?php
 
+include_once 'baseDeDonnees.class.php';
+
 /**
  * Cette classe est celle qui permet de gérer la table OptionHotel
  *
@@ -12,10 +14,12 @@ class OptionHotel
     private $m_prixOption;
     private $m_bdd;
     
-    
     /**
      * Construit un nouvel objet avec les paramètres passés, si un seul paramètre est passé alors on construit un objet avec les
      * données venant de la bdd
+     * Fonctionnement :
+     * new OptionHotel(idOptionHotel)
+     * new OptionHotel(libelleOption, prixOption)
      */
     function __construct()
     {
@@ -23,20 +27,12 @@ class OptionHotel
         $nbParam    = func_num_args();
         $tabParam   = func_get_args();
         
-        if($nbParam == 1)
+        if($nbParam == 1 && is_numeric($tabParam[0]))
             $this->constructId($tabParam[0]);
         elseif($nbParam == 2)
         {
-            if(is_string($tabParam[0]))
-            {
-                $this->m_libelleOption  = $tabParam[0];
-                $this->m_prixOption     = $tabParam[1];
-            }
-            else if(is_numeric($tabParam[0]))
-            {
-                $this->m_libelleOption  = $tabParam[1];
-                $this->m_prixOption     = $tabParam[0];
-            }
+            $this->m_libelleOption  = $tabParam[0];
+            $this->m_prixOption     = $tabParam[1];
         }
     }
     
@@ -46,16 +42,13 @@ class OptionHotel
      */
     function constructId($idOptionHotel)
     {
-        if(is_numeric($idOptionHotel))
-        {
-            $requete        = 'SELECT * FROM optionHotel WHERE idOption = ?';
-            $tabParametres  = array($idOptionHotel);
-            $tabResultats   = $this->m_bdd->selection($requete, $tabParametres);
-            
-            $this->m_idOption       = $tabResultats['idOption'];
-            $this->m_libelleOption  = $tabResultats['libelleOption'];
-            $this->m_prixOption     = $tabResultats['prixOption'];
-        }
+        $requete        = 'SELECT * FROM optionHotel WHERE idOption = ?';
+        $tabParametres  = array($idOptionHotel);
+        $tabResultats   = $this->m_bdd->selection($requete, $tabParametres);
+
+        $this->m_idOption       = $tabResultats[0]['idOption'];
+        $this->m_libelleOption  = $tabResultats[0]['libelleOption'];
+        $this->m_prixOption     = $tabResultats[0]['prixOption'];
     }
     
     /**
@@ -64,7 +57,7 @@ class OptionHotel
      */
     function libelleExisteDeja()
     {
-        $requete        = 'SELECT * FROM OptionHotel WHERE libelleOption = ?';
+        $requete        = 'SELECT * FROM optionHotel WHERE libelleOption = ?';
         $tabParametres  = array($this->m_libelleOption);
         $tabResultat    = $this->m_bdd->selection($requete, $tabParametres);
         if(empty($tabResultat))
@@ -78,7 +71,7 @@ class OptionHotel
      */
     function idExisteDeja()
     {
-        $requete        = 'SELECT * FROM OptionHotel WHERE idOption = ?';
+        $requete        = 'SELECT * FROM optionHotel WHERE idOption = ?';
         $tabParametres  = array($this->m_idOption);
         $tabResultat    = $this->m_bdd->selection($requete, $tabParametres);
         if(empty($tabResultat))
@@ -94,9 +87,12 @@ class OptionHotel
     {
         if(!$this->libelleExisteDeja())
         {
-            $requete        = 'INSERT INTO OptionHotel VALUES ("", ?, ?)';
+            $requete        = 'INSERT INTO optionHotel VALUES ("", ?, ?)';
             $tabParametres  = array($this->m_libelleOption, $this->m_prixOption);
-            return $this->m_bdd->ajouter($requete, $tabParametres);
+            $valRetour      = $this->m_bdd->ajouter($requete, $tabParametres);
+            if($valRetour != FALSE)
+                $this->initialiserId();
+            return $valRetour;
         }
         return FALSE;
     }
@@ -107,9 +103,10 @@ class OptionHotel
      */
     function modifierOptionHotel()
     {
+        $this->initialiserId();
         if($this->idExisteDeja())
         {
-            $requete        = 'UPDATE OptionHotel SET libelleOption = ?, prixOption = ? WHERE idOption = ?';
+            $requete        = 'UPDATE optionHotel SET libelleOption = ?, prixOption = ? WHERE idOption = ?';
             $tabParametres  = array($this->m_libelleOption, $this->m_prixOption, $this->m_idOption);
             return $this->m_bdd->modifier($requete, $tabParametres);
         }
@@ -122,13 +119,69 @@ class OptionHotel
      */
     function supprimerOptionHotel()
     {
+        $this->initialiserId();
         if($this->idExisteDeja())
         {
-            $requete        = 'DELETE FROM OptionHotel WHERE idOption = ?';
+            $requete        = 'DELETE FROM optionHotel WHERE idOption = ?';
             $tabParametres  = array($this->m_idOption);
             return $this->m_bdd->supprimer($requete, $tabParametres);
         }
         return FALSE;
+    }
+    
+    /**
+     * Fonction qui initialise l'idOption (elle sert quand on effectue un ajout et qu'on a toujours pas l'id de l'option)
+     */
+    function initialiserId()
+    {
+        if(empty($this->m_idOption))
+        {
+            $requete            = 'SELECT idOption FROM optionHotel WHERE libelleOption=? AND prixOption=?';
+            $tabParametres      = array($this->m_libelleOption, $this->m_prixOption);
+            $tabResultat        = $this->m_bdd->selection($requete, $tabParametres);
+            $this->m_idOption   = $tabResultat[0]['idOption']; 
+        }
+    }
+    
+    /**
+     * Retourne l'id de l'option courant, si celui-ci n'etait pas initialisé alors on récupère l'id dans la bdd
+     * @return int l'id de l'option 
+     */
+    function getIdOption()
+    {
+        $this->initialiserId();
+        return $this->m_idOption;
+    }
+    
+    function getLibelleOption()
+    {
+        return $this->m_libelleOption;
+    }
+    
+    function getPrixOption()
+    {
+        return $this->m_prixOption;
+    }
+    
+    function setLibelleOption($libelleOption)
+    {
+        $ancienLibelle = $this->m_libelleOption;
+        $this->m_libelleOption = $libelleOption;
+        if($this->libelleExisteDeja())
+            $this->m_libelleOption = $ancienLibelle;
+    }
+    
+    function setPrixOption($prixOption)
+    {
+        $this->m_prixOption = $prixOption;
+    }
+    
+    function __toString()
+    {
+        $str = '<dd>ID : '.$this->getIdOption().' --- ';
+        $str .= 'Libelle : '.$this->getLibelleOption().' --- ';
+        $str .= 'Prix : '.$this->getPrixOption().'</dd>';
+        return $str;
     }
 }
 
