@@ -240,6 +240,62 @@ function testClasseChambreOption()
     $optionHotel->supprimerOptionHotel();
 }
 
-testClasseChambreOption();
+//testClasseChambreOption();
+//------------------------------------------------------------------------------------------------------------------------//
+
+
+
+//----------------------------------------Vérifications de la classe Reservation----------------------------------------//
+include_once 'class/reservation.class.php';
+
+function ajoutReservation($reservation)
+{
+    if($reservation->ajouterReservation())
+        echo 'Ajout : GOOD<br/>';
+    else
+        echo 'Ajout : PAS GOOD<br/>';
+}
+
+function modifierReservation($reservation)
+{
+    $reservation->setAdresse("changement");
+    $reservation->setCodePostal("27500");
+    
+    if($reservation->modifierReservation())
+        echo 'Modification : GOOD<br/>';
+    else
+        echo 'Modification : PAS GOOD<br/>';
+}
+
+function supprimerReservation($reservation)
+{
+    if($reservation->supprimerReservation())
+        echo 'Suppression : GOOD<br/>';
+    else
+        echo 'Suppression : PAS GOOD<br/>';
+}
+
+function testClasseReservation()
+{
+    $chambre = new Chambre("Claudy", "chambre de pervers", 15, "pas besoin", "pareil");
+    $chambre->ajouterChambre();
+    $typeSejour = new TypeSejour("sejour de fou");
+    $typeSejour->ajouterTypeSejour();
+    
+    
+    echo '###### TEST RESERVATION ######<br/>';
+    $reservation = new Reservation("Trans", "Claudy", "Faucan", "0000000000", "claudy.faucan@gmail.com", "76600", "Le Havre", "Rue des pervers", date("Y-m-d"), 15, $chambre->getIdChambre(), $typeSejour->getIdType());
+    ajoutReservation($reservation);
+    echo $reservation;
+    modifierReservation($reservation);
+    echo $reservation;
+    supprimerReservation($reservation);
+    echo '###### FIN DU TEST ######<br/>'; 
+    
+    $chambre->supprimerChambre();
+    $typeSejour->supprimerTypeSejour();
+}
+
+testClasseReservation();
 //------------------------------------------------------------------------------------------------------------------------//
 ?>
