@@ -28,7 +28,7 @@ class Chambre
         $tabParam   = func_get_args();
         
         if($nbParam == 1 && is_numeric($tabParam[0]))
-            constructId($tabParam[0]);
+            $this->constructId($tabParam[0]);
         else if($nbParam == 5)
         {
             $this->m_nomChambre             = $tabParam[0];
@@ -46,11 +46,11 @@ class Chambre
         $tabResultat    = $this->m_bdd->selection($requete, $tabParametres);
         
         $this->m_idChambre              = $idChambre;
-        $this->m_nomChambre             = $tabResultat["nomChambre"];
-        $this->m_informationsChambre    = $tabResultat["informationsChambre"];
-        $this->m_capaciteChambre        = $tabResultat["capaciteChambre"];
-        $this->m_wcChambre              = $tabResultat["wc"];
-        $this->m_sdbChambre             = $tabResultat["sdb"];
+        $this->m_nomChambre             = $tabResultat[0]["nomChambre"];
+        $this->m_informationsChambre    = $tabResultat[0]["informationsChambre"];
+        $this->m_capaciteChambre        = $tabResultat[0]["capaciteChambre"];
+        $this->m_wcChambre              = $tabResultat[0]["wc"];
+        $this->m_sdbChambre             = $tabResultat[0]["sdb"];
     }
     
     /**
@@ -73,6 +73,7 @@ class Chambre
      */
     function idExisteDeja()
     {
+        $this->initialiserId();
         $requete        = 'SELECT * FROM chambre WHERE idChambre = ?';
         $tabParametres  = array($this->m_idChambre);
         $tabResultat    = $this->m_bdd->selection($requete, $tabParametres);
@@ -207,6 +208,12 @@ class Chambre
     function getSdbChambre()
     {
         return $this->m_sdbChambre;
+    }
+    
+    function getIdChambre()
+    {
+        $this->initialiserId();
+        return $this->m_idChambre;
     }
 }
 

@@ -139,6 +139,107 @@ function testClasseTypeSejour()
     echo '###### FIN DU TEST ######<br/>';
 }
 
-testClasseTypeSejour();
+//testClasseTypeSejour();
+//------------------------------------------------------------------------------------------------------------------------//
+
+
+
+//----------------------------------------Vérifications de la classe PrixChambre----------------------------------------//
+include_once 'class/prixChambre.class.php';
+
+function ajoutPrixChambre($prixChambre)
+{
+    
+    if($prixChambre->ajouterPrixChambre())
+        echo 'Ajout : GOOD<br/>';
+    else
+        echo 'Ajout : PAS GOOD<br/>';
+}
+
+function modifierPrixChambre($prixChambre)
+{
+    $prixChambre->setPrix(100);
+    
+    if($prixChambre->modifierPrixChambre())
+        echo 'Modification : GOOD<br/>';
+    else
+        echo 'Modification : PAS GOOD<br/>';
+}
+
+function supprimerPrixChambre($prixChambre)
+{
+    if($prixChambre->supprimerPrixChambre())
+        echo 'Suppression : GOOD<br/>';
+    else
+        echo 'Suppression : PAS GOOD<br/>';
+}
+
+function testClassePrixChambre()
+{
+    $chambre = new Chambre("Claudy", "chambre de pervers", 15, "pas besoin", "pareil");
+    $chambre->ajouterChambre();
+    $typeSejour = new TypeSejour("Sejour de noob");
+    $typeSejour->ajouterTypeSejour();
+    
+    
+    echo '###### TEST PRIX CHAMBRE ######<br/>';
+    $prixChambre = new PrixChambre($chambre->getIdChambre(), $typeSejour->getIdType());
+    $prixChambre->setPrix(4000);
+    ajoutPrixChambre($prixChambre);
+    echo $prixChambre;
+    modifierPrixChambre($prixChambre);
+    echo $prixChambre;
+    supprimerPrixChambre($prixChambre);
+    echo '###### FIN DU TEST ######<br/>';
+    
+    $chambre->supprimerChambre();
+    $typeSejour->supprimerTypeSejour();
+}
+
+//testClassePrixChambre();
+//------------------------------------------------------------------------------------------------------------------------//
+
+
+
+//----------------------------------------Vérifications de la classe ChambreOption----------------------------------------//
+include_once 'class/chambreOption.class.php';
+
+function ajoutChambreOption($chambreOption)
+{
+    
+    if($chambreOption->ajouterChambreOption())
+        echo 'Ajout : GOOD<br/>';
+    else
+        echo 'Ajout : PAS GOOD<br/>';
+}
+
+function supprimerChambreOption($chambreOption)
+{
+    if($chambreOption->supprimerChambreOption())
+        echo 'Suppression : GOOD<br/>';
+    else
+        echo 'Suppression : PAS GOOD<br/>';
+}
+
+function testClasseChambreOption()
+{
+    $chambre = new Chambre("Claudy", "chambre de pervers", 15, "pas besoin", "pareil");
+    $chambre->ajouterChambre();
+    $optionHotel = new OptionHotel("option premium", 100);
+    $optionHotel->ajouterOptionHotel();
+    
+    
+    echo '###### TEST CHAMBRE OPTION ######<br/>';
+    $chambreOption = new ChambreOption($chambre->getIdChambre(), $optionHotel->getIdOption());
+    ajoutChambreOption($chambreOption);
+    echo $chambreOption;
+    supprimerChambreOption($chambreOption);
+    echo '###### FIN DU TEST ######<br/>';
+    
+    $chambre->supprimerChambre();
+    $optionHotel->supprimerOptionHotel();
+}
+
+testClasseChambreOption();
 //------------------------------------------------------------------------------------------------------------------------//
 ?>

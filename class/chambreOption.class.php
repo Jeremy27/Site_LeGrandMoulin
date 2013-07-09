@@ -11,7 +11,7 @@ class ChambreOption
     private $m_bdd;
     
     /**
-     * Prend en paramètre l'id de la Chambre et l'id de l'OptionHotel sur
+     * Prend en paramètre l'id de la Chambre et l'id de l'OptionHotel pour créer une liaison entre ces deux éléments
      * @param int $idChambre 
      * @param int $idOption
      */
@@ -29,7 +29,7 @@ class ChambreOption
     function existeDeja()
     {
         $requete        = 'SELECT * FROM chambreOption WHERE idOption_optionHotel = ? AND idChambre_chambre = ?';
-        $tabParametres  = array($this->m_optionHotel->getId(), $this->m_chambre->getId());
+        $tabParametres  = array($this->m_optionHotel->getIdOption(), $this->m_chambre->getIdChambre());
         $tabResultat    = $this->m_bdd->selection($requete, $tabParametres);
         if(empty($tabResultat))
             return FALSE;
@@ -45,7 +45,7 @@ class ChambreOption
         if(!$this->existeDeja())
         {
             $requete        = 'INSERT INTO chambreOption VALUES(?, ?)';
-            $tabParametres  = array($this->m_optionHotel->getId(), $this->m_chambre->getId());
+            $tabParametres  = array($this->m_optionHotel->getIdOption(), $this->m_chambre->getIdChambre());
             return $this->m_bdd->ajouter($requete, $tabParametres);
         }
         return FALSE;
@@ -57,10 +57,10 @@ class ChambreOption
      */
     function supprimerChambreOption()
     {
-        if(!$this->existeDeja())
+        if($this->existeDeja())
         {
-            $requete        = 'DELETE FROM chambreOption VALUES(?, ?)';
-            $tabParametres  = array($this->m_optionHotel->getId(), $this->m_chambre->getId());
+            $requete        = 'DELETE FROM chambreOption WHERE idOption_optionHotel = ? AND idChambre_chambre = ?';
+            $tabParametres  = array($this->m_optionHotel->getIdOption(), $this->m_chambre->getIdChambre());
             return $this->m_bdd->supprimer($requete, $tabParametres);
         }
         return FALSE;
@@ -82,6 +82,13 @@ class ChambreOption
     function getChambre()
     {
         return $this->m_chambre;
+    }
+    
+    function __toString()
+    {
+        $str = '<dd>CHAMBRE : '.$this->m_chambre.'<br/>';
+        $str .= 'OPTION HOTEL : '.$this->m_optionHotel.'</dd><br/>';
+        return $str;
     }
 }
 
