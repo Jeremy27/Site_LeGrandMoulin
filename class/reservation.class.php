@@ -287,7 +287,8 @@ class Reservation
     
     function __toString()
     {
-        $str = '<dd>ID : '.$this->m_idReservation.' --- ';
+        $str  = '===RESERVATION===<br/>';
+        $str = 'ID : '.$this->m_idReservation.' --- ';
         $str .= 'CIVILITE : '.$this->m_civilite.' --- ';
         $str .= 'NOM : '.$this->m_nom.' --- ';
         $str .= 'PRENOM : '.$this->m_prenom.' --- ';
@@ -299,7 +300,8 @@ class Reservation
         $str .= 'DATE DEBUT : '.$this->m_dateDebut.' --- ';
         $str .= 'NB NUIT : '.$this->m_nbNuit.' --- ';
         $str .= 'ID CHAMBRE : '.$this->m_chambre->getIdChambre().' --- ';
-        $str .= 'ID TYPESEJOUR : '.$this->m_typeSejour->getIdType().'</dd>';
+        $str .= 'ID TYPESEJOUR : '.$this->m_typeSejour->getIdType().'<br/>';
+        $str .= '=================<br/>';
         return $str;
     }
 }

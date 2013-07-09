@@ -113,9 +113,11 @@ class PrixChambre
     
     function __toString()
     {
-        $str = '<dd>CHAMBRE : '.$this->m_chambre.'<br/>';
-        $str .= 'TYPE SEJOUR : '.$this->m_type.'<br/>';
-        $str .= 'PRIX : '.$this->m_prix.'</dd><br/>';
+        $str  = '===PRIX_CHAMBRE===<br/>';
+        $str = 'ID CHAMBRE : '.$this->m_chambre->getIdChambre().' --- ';
+        $str .= 'ID TYPE SEJOUR : '.$this->m_type->getIdType().' --- ';
+        $str .= 'PRIX : '.$this->m_prix.'<br/>';
+        $str .= '==================<br/>';
         return $str;
     }
 }

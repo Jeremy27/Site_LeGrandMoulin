@@ -178,9 +178,11 @@ class OptionHotel
     
     function __toString()
     {
-        $str = '<dd>ID : '.$this->getIdOption().' --- ';
-        $str .= 'Libelle : '.$this->getLibelleOption().' --- ';
-        $str .= 'Prix : '.$this->getPrixOption().'</dd>';
+        $str  = '===OPTION_HOTEL===<br/>';
+        $str .= 'ID : '.$this->m_idOption.' --- ';
+        $str .= 'LIBELLE : '.$this->m_libelleOption.' --- ';
+        $str .= 'PRIX : '.$this->m_prixOption.'<br/>';
+        $str .= '==================';
         return $str;
     }
 }

@@ -296,6 +296,65 @@ function testClasseReservation()
     $typeSejour->supprimerTypeSejour();
 }
 
-testClasseReservation();
+//testClasseReservation();
 //------------------------------------------------------------------------------------------------------------------------//
+
+
+
+//----------------------------------------Vérifications de la classe ReservationOptionHotel----------------------------------------//
+include_once 'class/reservationOptionHotel.class.php';
+
+function ajoutReservationOptionHotel($reservationOptionHotel)
+{
+    if($reservationOptionHotel->ajouterReservationOptionHotel())
+        echo 'Ajout : GOOD<br/>';
+    else
+        echo 'Ajout : PAS GOOD<br/>';
+}
+
+function supprimerReservationOptionHotel($reservationOptionHotel)
+{
+    if($reservationOptionHotel->supprimerReservationOptionHotel())
+        echo 'Suppression : GOOD<br/>';
+    else
+        echo 'Suppression : PAS GOOD<br/>';
+}
+
+function testClasseReservationOptionHotel()
+{
+    $chambre = new Chambre("Claudy", "chambre de pervers", 15, "pas besoin", "pareil");
+    $chambre->ajouterChambre();
+    $typeSejour = new TypeSejour("sejour de fou");
+    $typeSejour->ajouterTypeSejour();
+    $reservation = new Reservation("Trans", "Claudy", "Faucan", "0000000000", "claudy.faucan@gmail.com", "76600", "Le Havre", "Rue des pervers", date("Y-m-d"), 15, $chambre->getIdChambre(), $typeSejour->getIdType());
+    $reservation->ajouterReservation();
+    $optionHotel = new OptionHotel("option premium", 100);
+    $optionHotel->ajouterOptionHotel();
+    
+    
+    echo '###### TEST CHAMBRE OPTION ######<br/>';
+    $reservationOptionHotel = new ReservationOptionHotel($reservation->getIdReservation(), $optionHotel->getIdOption());
+    ajoutReservationOptionHotel($reservationOptionHotel);
+    echo $reservationOptionHotel;
+    supprimerReservationOptionHotel($reservationOptionHotel);
+    echo '###### FIN DU TEST ######<br/>';
+    
+    $reservation->supprimerReservation();
+    $optionHotel->supprimerOptionHotel();
+    $chambre->supprimerChambre();
+    $typeSejour->supprimerTypeSejour();
+    
+    //testClasseReservationOptionHotel();
+}
+
+//------------------------------------------------------------------------------------------------------------------------//
+
+
+//testClasseChambre();
+//testClassePrixChambre();
+//testClasseChambreOption();
+//testClasseOptionHotel();
+//testClasseReservation();
+//testClasseReservationOptionHotel();
+//testClasseTypeSejour();
 ?>

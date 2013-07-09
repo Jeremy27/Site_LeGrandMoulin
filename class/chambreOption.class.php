@@ -86,8 +86,10 @@ class ChambreOption
     
     function __toString()
     {
-        $str = '<dd>CHAMBRE : '.$this->m_chambre.'<br/>';
-        $str .= 'OPTION HOTEL : '.$this->m_optionHotel.'</dd><br/>';
+        $str  = '===CHAMBRE-OPTION===<br/>';
+        $str .= 'ID CHAMBRE : '.$this->m_chambre->getIdChambre().' --- ';
+        $str .= 'ID OPTION HOTEL : '.$this->m_optionHotel->getIdOption().'<br/>';
+        $str .= '====================<br/>';
         return $str;
     }
 }

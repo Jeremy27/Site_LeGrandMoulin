@@ -146,17 +146,6 @@ class Chambre
         return FALSE;
     }
     
-    function __toString()
-    {
-        $str = '<dd>ID : '.$this->m_idChambre.' --- ';
-        $str .= 'NOM : '.$this->m_nomChambre.' --- ';
-        $str .= 'INFORMATIONS : '.$this->m_informationsChambre.' --- ';
-        $str .= 'CAPACITE : '.$this->m_capaciteChambre.' --- ';
-        $str .= 'WC : '.$this->m_wcChambre.' --- ';
-        $str .= 'SDB : '.$this->m_sdbChambre.'</dd>';
-        return $str;
-    }
-    
     function setNomChambre($nomChambre)
     {
         $ancienNom          = $this->m_nomChambre;
@@ -214,6 +203,19 @@ class Chambre
     {
         $this->initialiserId();
         return $this->m_idChambre;
+    }
+    
+    function __toString()
+    {
+        $str  = '===CHAMBRE===<br/>';
+        $str .= 'ID : '.$this->m_idChambre.' --- ';
+        $str .= 'NOM : '.$this->m_nomChambre.' --- ';
+        $str .= 'INFORMATIONS : '.$this->m_informationsChambre.' --- ';
+        $str .= 'CAPACITE : '.$this->m_capaciteChambre.' --- ';
+        $str .= 'WC : '.$this->m_wcChambre.' --- ';
+        $str .= 'SDB : '.$this->m_sdbChambre.'<br/>';
+        $str .= '=============<br/>';
+        return $str;
     }
 }
 

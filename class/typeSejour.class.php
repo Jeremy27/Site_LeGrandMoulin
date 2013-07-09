@@ -155,8 +155,10 @@ class TypeSejour
     
     function __toString()
     {
-        $str = '<dd>ID : '.$this->m_idType.' --- ';
-        $str .= 'LIBELLE : '.$this->m_libelleType.'</dd>';
+        $str  = '===TYPE_SEJOUR===<br/>';
+        $str .= 'ID : '.$this->m_idType.' --- ';
+        $str .= 'LIBELLE : '.$this->m_libelleType.'<br/>';
+        $str .= '=================<br/>';
         return $str;
     }
 }
