@@ -1,6 +1,6 @@
 <?php
 
-function getEntete()
+function getEntete($cheminRacine="")
 {
     $entete = '
         <!DOCTYPE html>
@@ -12,24 +12,25 @@ function getEntete()
                 <title>Le Grand Moulin</title>
 
 
-                <link rel="stylesheet" href="css/foundation.css" />
+                <link rel="stylesheet" href="'.$cheminRacine.'css/foundation.css" />
 
 
-                <script src="js/vendor/custom.modernizr.js"></script>
+                <script src="'.$cheminRacine.'js/vendor/custom.modernizr.js"></script>
 
             </head>
             <body>';
     return $entete;
 }
 
-function getMenu()
+function getMenu($cheminRacine="")
 {
     $menu = '
         <nav class="top-bar">
             <ul class="title-area">
                 <li class="name">
-                    <a href="#"><img src="img/LGM.png" alt="Smiley face" width="240"/></a>
+                    <a href="#"><img src="'.$cheminRacine.'img/LGM.png" alt="Smiley face" width="240"/></a>
                 </li>
+                <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
                 <section class="top-bar-section">
                     <ul class="left">
                         <li class="divider"></li>
@@ -44,22 +45,25 @@ function getMenu()
                         <li><a href="#">Contact</a></li>
                         <li class="divider"></li>
                     </ul>
+                    <ul class="right">
+                        <li><a href="#">Se connecter</a></li>
+                    </ul>
                 </section>
             </ul>
         </nav> ';
     return $menu;
 }
 
-function getPiedDePage()
+function getPiedDePage($cheminRacine="")
 {
     $piedDePage = '
             <script>
                 document.write(\'<script src=\' +
-                        (\'__proto__\' in {} ? \'js/vendor/zepto\' : \'js/vendor/jquery\') +
+                        (\'__proto__\' in {} ? \''.$cheminRacine.'js/vendor/zepto\' : \'js/vendor/jquery\') +
                         \'.js><\/script>\')
             </script>
 
-            <script src="js/foundation.min.js"></script>
+            <script src="'.$cheminRacine.'js/foundation.min.js"></script>
             <!--
 
             <script src="js/foundation/foundation.js"></script>

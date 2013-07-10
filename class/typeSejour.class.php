@@ -134,6 +134,27 @@ class TypeSejour
         return FALSE;
     }
     
+    /**
+     * Méthode permettant de renvoyer un tableau d'objets de type TypeSejour en fonction des conditions passées en parametre 
+     * @param String $where (exemple : "WHERE idType=?")
+     * @param tableau $tabParametres (exemple : array(2))
+     * @return TypeSejour[]
+     */
+    static function getObjetsTypeSejour($where, $tabParametres)
+    {
+        $bdd        = new BaseDeDonnees();
+        $requete    = 'SELECT idType FROM typeSejour '.$where;
+        $tabRes     = $bdd->selection($requete, $tabParametres);
+        $tabObjets  = array();
+        
+        for($i=0; $i<count($tabRes); $i++)
+            $tabObjets[$i] = new TypeSejour($tabRes[$i]['idType']);
+        
+        if(empty($tabObjets))
+            return NULL;
+        return $tabObjets;
+    }
+    
     function getIdType()
     {
         $this->initialiserId();
