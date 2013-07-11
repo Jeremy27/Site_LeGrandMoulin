@@ -70,10 +70,10 @@ echo getMenu($cheminRacine);
                 <div class="small-2 large-2 columns left">
                     <div class="switch small round">
                         <input id="sdbExterieur" name="sdbDansChambre" type="radio" checked>
-                        <label for="sdbExterieur" onclick="">Ext&eacute;rieure</label>
+                        <label for="sdbExterieur" onclick="">Ext&eacute;rieur</label>
 
                         <input id="wcInterieur" name="sdbDansChambre" type="radio">
-                        <label for="sdbInterieur" onclick="">Int&eacute;rieure</label>
+                        <label for="sdbInterieur" onclick="">Int&eacute;rieur</label>
 
                         <span></span>
                     </div>
