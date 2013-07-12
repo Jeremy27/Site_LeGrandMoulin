@@ -4,85 +4,152 @@ $cheminClass = './class/';
 include_once $cheminClass.'baseDeDonnees.class.php';
 include_once $cheminClass.'utilisateur.class.php';
 include_once $cheminClass.'groupeUtilisateur.class.php';
+include_once $cheminClass.'typePlat.class.php';
+include_once $cheminClass.'platRestaurant.class.php';
 
-
-// Test de la classe Base de données
-function testClasseBaseDeDonnes()
-{
-    $bdd = new baseDeDonnees();
-    
-    // Test de la selection
-    $tabParametres = array();
-    array_push($tabParametres, 2);
-    array_push($tabParametres, "claud");
-    $tab = $bdd->selection("select * from utilisateur", $tabParametres);
-
-
-    //$tabParametres2 = array();
-    //array_push($tabParametres2, "claudy2");
-    //array_push($tabParametres2, "claudy2");
-    //array_push($tabParametres2, 1);
-    //echo $bdd->modifier("insert into utilisateur values (\"\", ?, ?, ?)", $tabParametres2);
-
-
-// Moi
-// ChambreOption
-// PlatFormuleRestaurant
-
-$tabParametres3 = array();
-array_push($tabParametres3, 33);
-echo $bdd->supprimer("delete from utilisateur where idUtilisateur = ?", $tabParametres3);
-
-
-    print_r($tab);
-}
-
-//$tab = [1];
-//
-//if($tab)
-//{
-//    echo 'jérémy est un noob-boy !';
-//}
-
-/* ------------------------------------------------- Fonction test classe Utilisateur ------------------------------------------------- */
-function testClasseUtilisateur()
-{
-//    // Test de la création des utilisateurs
-//    $utilisateur1 = new Utilisateur(1);
-//    print_r($utilisateur1);
-//    $utilisateur2 = new Utilisateur('mathieu', 'mdp');
-//    print_r($utilisateur2);
-//    
-//    // Ajout de l'utilisateur dans la base de données
-//    $utilisateur2->ajouterUtilisateur();
-//    
-//    // Modification de l'utilisateur dans la base de données
-//    $utilisateur1->setLoginUtilisateur('Mathieu');
-//    $utilisateur1->modifierUtilisateur();
-//    
-//    // Suppression de l'utilisateur
-//    $utilisateur1->supprimerUtilisateur();
-    
-    
-}
-/* ------------------------------------------------- Fonction test classe GroupeUtilisateur ------------------------------------------------- */
+/* ********************************** classe GroupeUtilisateur ********************************** */
 function testClasseGroupeUtilisateur()
 {
-    // Test de la création des groupes
-    $groupe1 = new GroupeUtilisateur(1);
-    print_r($groupe1);
-    $groupe2 = new GroupeUtilisateur('modérateur');
-    print_r($groupe2);
+    // Création d'un nouveau groupe
+    $groupe = new GroupeUtilisateur('pgm');
+    
+    // Ajout du groupe en base données
+    if($groupe->ajouterGroupe())
+        echo 'Ajout du groupe réussi ! <br />';
+    else
+        echo 'Echec de l\'ajout du groupe !<br />';
+    
+    // Affichage du groupe
+    echo '####### Groupe #######<br />';
+    var_dump($groupe);
+    
+    // Modification du groupe en base données
+    $groupe->setLibelleGroupe('Noob');
+    if($groupe->modifierGroupe())
+        echo 'Modification du groupe réussi !<br />';
+    else
+        echo 'Echec de la modification du groupe !<br />';
+    
+    // Affichage du groupe
+    echo '####### Groupe #######<br />';
+    var_dump($groupe);
+    
+    // Suppression du groupe en base données
+    if($groupe->supprimerGroupe())
+        echo 'Suppression du groupe réussi !<br />';
+    else
+        echo 'Echec de la suppression du groupe !<br />';
+    
 }
 
+/* ********************************** classe Utilisateur ********************************** */
+function testClasseUtilisateur()
+{
+    // Création d'un nouveau groupe
+    $utilisateur = new Utilisateur('Flamby', 'dsfsdf');
+    
+    // Ajout du groupe en base données
+    if($utilisateur->ajouterUtilisateur())
+        echo 'Ajout de l\'utilisateur réussi ! <br />';
+    else
+        echo 'Echec de l\'ajout de l\'utilisateur !<br />';
+    
+    // Affichage du groupe
+    echo '####### Utilisateur #######<br />';
+    var_dump($utilisateur);
+    
+    // Modification du groupe en base données
+    $utilisateur->setLoginUtilisateur('Claudy');
+    $utilisateur->setMdpUtilisateur('mdp');
+    if($utilisateur->modifierUtilisateur())
+        echo 'Modification de l\'utilisateur réussi !<br />';
+    else
+        echo 'Echec de la modification de l\'utilisateur !<br />';
+    
+    // Affichage du groupe
+    echo '####### Utilisateur #######<br />';
+    var_dump($utilisateur);
+    
+    // Suppression du groupe en base données
+    if($utilisateur->supprimerUtilisateur())
+        echo 'Suppression de l\'utilisateur réussi !<br />';
+    else
+        echo 'Echec de la suppression de l\'utilisateur !<br />';
+}
 
-/* ------------------------------------------------- Appel des fonctions de test ------------------------------------------------- */
-// Appel des fonctions de test
-echo 'Test de la classe utilisateur: <br />';
-testClasseUtilisateur();
-echo '<br />';
-//echo 'Test de la classe groupeUtilisateur: <br />';
+/* ********************************** classe TypePlat ********************************** */
+function testClasseTypePlat()
+{
+    // Création d'un nouveau type de plat
+    $typePlat = new TypePlat('Entrée');
+    
+    // Ajout du type de plat en base données
+    if($typePlat->ajouterTypePlat())
+        echo 'Ajout du type de plat réussi ! <br />';
+    else
+        echo 'Echec de l\'ajout du type de plat !<br />';
+    
+    // Affichage du type de plat
+    echo '####### Type Plat #######<br />';
+    var_dump($typePlat);
+    
+    // Modification du type de plat en base données
+    $typePlat->setLibelleTypePlat('Dessert');
+    if($typePlat->modifierTypePlat())
+        echo 'Modification du type de plat réussi !<br />';
+    else
+        echo 'Echec de la modification du type de plat !<br />';
+    
+    // Affichage du type de plat
+    echo '####### Type Plat #######<br />';
+    var_dump($typePlat);
+    
+    // Suppression du type de plat en base données
+    if($typePlat->supprimerTypePlat())
+        echo 'Suppression du type de plat réussi !<br />';
+    else
+        echo 'Echec de la suppression du type de plat !<br />';
+}
+
+/* ********************************** classe TypePlat ********************************** */
+function testClassePlatRestaurant()
+{
+    // Création d'un nouveau plat
+    $typePlat = new TypePlat(5);
+    $plat = new PlatRestaurant('Steack - Frites', 8.5,$typePlat);
+    
+    // Ajout du plat en base données
+    if($plat->ajouterPlat())
+        echo 'Ajout du plat réussi ! <br />';
+    else
+        echo 'Echec de l\'ajout du plat !<br />';
+    
+    // Affichage du plat
+    echo '####### Plat #######<br />';
+    var_dump($plat);
+    
+    // Modification du plat
+    $plat->setLibellePlat('Jambon - Frites');
+    $plat->setPrixPlat(10);
+    if($plat->modifierPlat())
+        echo 'La modification a réussi !<br />';
+    else
+        echo 'Echec de la modification !<br />';
+    
+    // Affichage du plat
+    echo '####### Plat #######<br />';
+    var_dump($plat);
+    
+    // Suppression du plat
+    if($plat->supprimerPlat())
+        echo 'Suppression du plat réussi !<br />';
+    else
+        echo 'Echec de la suppression du plat !<br />';
+    
+}
 //testClasseGroupeUtilisateur();
-//echo '<br />';
+//testClasseUtilisateur();
+//testClasseTypePlat();
+//testClassePlatRestaurant();
 ?>
 </pre>
