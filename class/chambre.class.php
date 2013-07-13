@@ -21,7 +21,7 @@ class Chambre
      * Ou :
      * new Chambre(idChambre)
      */
-    function __construct()
+    public function __construct()
     {
         $this->m_bdd = new BaseDeDonnees();
         $nbParam    = func_num_args();
@@ -39,7 +39,7 @@ class Chambre
         }
     }
     
-    function constructId($idChambre)
+    private function constructId($idChambre)
     {
         $requete        = "SELECT * FROM chambre WHERE idChambre=?";
         $tabParametres  = array($idChambre);
@@ -57,7 +57,7 @@ class Chambre
      * Vérifie si la chambre existe déjà dans la base de données en fonction de son nom
      * @return boolean TRUE si la chambre existe déjà, FALSE sinon
      */
-    function nomExisteDeja()
+    public function nomExisteDeja()
     {
         $requete        = 'SELECT * FROM chambre WHERE nomChambre = ?';
         $tabParametres  = array($this->m_nomChambre);
@@ -71,7 +71,7 @@ class Chambre
      * Vérifie si la chambre existe déjà dans la base de données en fonction de son id
      * @return boolean TRUE si la chambre existe déjà, FALSE sinon
      */
-    function idExisteDeja()
+    public function idExisteDeja()
     {
         $this->initialiserId();
         $requete        = 'SELECT * FROM chambre WHERE idChambre = ?';
@@ -85,7 +85,7 @@ class Chambre
     /**
      * Fonction qui initialise l'idChambre (elle sert quand on effectue un ajout et qu'on a toujours pas l'id de l'option)
      */
-    function initialiserId()
+    private function initialiserId()
     {
         if(empty($this->m_idChambre))
         {
@@ -100,7 +100,7 @@ class Chambre
      * Ajoute une chambre dans la table chambre a condition que cette chambre n'existe pas déjà
      * @return boolean TRUE si l'ajout s'est bien déroulé, FALSE sinon (FALSE si la chambre existait déjà)
      */
-    function ajouterChambre()
+    public function ajouterChambre()
     {
         if(!$this->nomExisteDeja())
         {
@@ -118,7 +118,7 @@ class Chambre
      * Modifie une chambre a condition que celle ci existe dans la bdd
      * @return boolean TRUE si la modification s'est bien passée, FALSE sinon
      */
-    function modifierChambre()
+    public function modifierChambre()
     {
         $this->initialiserId();
         if($this->idExisteDeja())
@@ -134,7 +134,7 @@ class Chambre
      * Supprime une chambre si elle existe bien
      * @return boolean TRUE si la suppression s'est bien passée, FALSE sinon
      */
-    function supprimerChambre()
+    public function supprimerChambre()
     {
         $this->initialiserId();
         if($this->idExisteDeja())
@@ -146,7 +146,28 @@ class Chambre
         return FALSE;
     }
     
-    function setNomChambre($nomChambre)
+    /**
+     * Méthode permettant de renvoyer un tableau d'objets de type Chambre en fonction des conditions passées en parametre 
+     * @param String $where (exemple : "WHERE idChambre=?")
+     * @param tableau $tabParametres (exemple : array(2))
+     * @return Chambre[]
+     */
+    static function getObjetsChambre($where, $tabParametres)
+    {
+        $bdd        = new BaseDeDonnees();
+        $requete    = 'SELECT idChambre FROM chambre '.$where;
+        $tabRes     = $bdd->selection($requete, $tabParametres);
+        $tabObjets  = array();
+        
+        for($i=0; $i<count($tabRes); $i++)
+            $tabObjets[$i] = new Chambre($tabRes[$i]['idChambre']);
+        
+        if(empty($tabObjets))
+            return NULL;
+        return $tabObjets;
+    }
+    
+    public function setNomChambre($nomChambre)
     {
         $ancienNom          = $this->m_nomChambre;
         $this->m_nomChambre = $nomChambre;
@@ -154,58 +175,58 @@ class Chambre
             $this->m_nomChambre = $ancienNom;
     }
     
-    function setInformationsChambre($informationsChambre)
+    public function setInformationsChambre($informationsChambre)
     {
         $this->m_informationsChambre = $informationsChambre;
     }
     
-    function setCapaciteChambre($capaciteChambre)
+    public function setCapaciteChambre($capaciteChambre)
     {
         $this->m_capaciteChambre = $capaciteChambre;
     }
     
-    function setWcChambre($wcChambre)
+    public function setWcChambre($wcChambre)
     {
         $this->m_wcChambre = $wcChambre;
     }
     
-    function setSdbChambre($sdbChambre)
+    public function setSdbChambre($sdbChambre)
     {
         $this->m_sdbChambre = $sdbChambre;
     }
     
-    function getNomChambre()
+    public function getNomChambre()
     {
         return $this->m_nomChambre;
     }
     
-    function getInformationsChambre()
+    public function getInformationsChambre()
     {
         return $this->m_informationsChambre;
     }
     
-    function getCapaciteChambre()
+    public function getCapaciteChambre()
     {
         return $this->m_capaciteChambre;
     }
     
-    function getWcChambre()
+    public function getWcChambre()
     {
         return $this->m_wcChambre;
     }
     
-    function getSdbChambre()
+    public function getSdbChambre()
     {
         return $this->m_sdbChambre;
     }
     
-    function getIdChambre()
+    public function getIdChambre()
     {
         $this->initialiserId();
         return $this->m_idChambre;
     }
     
-    function __toString()
+    public function __toString()
     {
         $str  = '===CHAMBRE===<br/>';
         $str .= 'ID : '.$this->m_idChambre.' --- ';

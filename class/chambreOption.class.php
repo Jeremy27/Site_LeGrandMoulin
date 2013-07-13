@@ -15,7 +15,7 @@ class ChambreOption
      * @param int $idChambre 
      * @param int $idOption
      */
-    function __construct($idChambre, $idOption)
+    public function __construct($idChambre, $idOption)
     {
         $this->m_chambre        = new Chambre($idChambre);
         $this->m_optionHotel    = new OptionHotel($idOption);
@@ -26,7 +26,7 @@ class ChambreOption
      * Cette méthode vérifie si l'association a déjà été créée dans la bdd
      * @return boolean TRUE si l'association existe déjà, FALSE sinon
      */
-    function existeDeja()
+    public function existeDeja()
     {
         $requete        = 'SELECT * FROM chambreOption WHERE idOption_optionHotel = ? AND idChambre_chambre = ?';
         $tabParametres  = array($this->m_optionHotel->getIdOption(), $this->m_chambre->getIdChambre());
@@ -40,7 +40,7 @@ class ChambreOption
      * Cette méthode ajoute une entrée Option/Chambre dans la bdd
      * @return boolean TRUE si la requête s'est correctement déroulée, FALSE sinon (FALSE si l'association existait déjà)
      */
-    function ajouterChambreOption()
+    public function ajouterChambreOption()
     {
         if(!$this->existeDeja())
         {
@@ -55,7 +55,7 @@ class ChambreOption
      * Cette méthode supprime une entrée Option/Chambre dans la bdd (table chambreOption)
      * @return boolean TRUE si la requête s'est correctement déroulée, FALSE sinon (FALSE si l'association n'existait pas)
      */
-    function supprimerChambreOption()
+    public function supprimerChambreOption()
     {
         if($this->existeDeja())
         {
@@ -70,7 +70,7 @@ class ChambreOption
      * Retourne l'objet OptionHotel courant
      * @return OptionHotel l'objet courant pour manipuler l'optionHotel
      */
-    function getOptionHotel()
+    public function getOptionHotel()
     {
         return $this->m_optionHotel;
     }
@@ -79,12 +79,33 @@ class ChambreOption
      * Retourne l'objet Chambre courant
      * @return Chambre l'objet pour manipuler la chambre
      */
-    function getChambre()
+    public function getChambre()
     {
         return $this->m_chambre;
     }
     
-    function __toString()
+    /**
+     * Méthode permettant de renvoyer un tableau d'objets de type ChambreOption en fonction des conditions passées en parametre 
+     * @param String $where (exemple : "WHERE idOption_optionHotel=? AND idChambre_chambre=?")
+     * @param tableau $tabParametres (exemple : array(1, 1))
+     * @return ChambreOption[]
+     */
+    static function getObjetsChambreOption($where, $tabParametres)
+    {
+        $bdd        = new BaseDeDonnees();
+        $requete    = 'SELECT * FROM chambreOption '.$where;
+        $tabRes     = $bdd->selection($requete, $tabParametres);
+        $tabObjets  = array();
+        
+        for($i=0; $i<count($tabRes); $i++)
+            $tabObjets[$i] = new ChambreOption($tabRes[$i]['idOption_optionHotel'], $tabRes[$i]['idChambre_chambre']);
+        
+        if(empty($tabObjets))
+            return NULL;
+        return $tabObjets;
+    }
+    
+    public function __toString()
     {
         $str  = '===CHAMBRE-OPTION===<br/>';
         $str .= 'ID CHAMBRE : '.$this->m_chambre->getIdChambre().' --- ';

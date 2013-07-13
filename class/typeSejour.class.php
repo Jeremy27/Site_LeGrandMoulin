@@ -17,7 +17,7 @@ class TypeSejour
      * new TypeSejour(idType)
      * new TypeSejour(libelleType)
      */
-    function __construct()
+    public function __construct()
     {
         $this->m_bdd = new BaseDeDonnees();
         $tabParam   = func_get_args();
@@ -32,7 +32,7 @@ class TypeSejour
      * Construit l'objet via l'id passé en paramètre
      * @param int $idType
      */
-    function constructId($idType)
+    private function constructId($idType)
     {
         $requete        = 'SELECT * FROM typeSejour WHERE idType = ?';
         $tabParametres  = array($idType);
@@ -46,7 +46,7 @@ class TypeSejour
      * Vérifie si le typeSejour existe déjà dans la base de données en fonction du libellé
      * @return boolean TRUE si le typeSejour existe déjà, FALSE sinon
      */
-    function libelleExisteDeja()
+    public function libelleExisteDeja()
     {
         $requete        = 'SELECT * FROM typeSejour WHERE libelleType = ?';
         $tabParametres  = array($this->m_libelleType);
@@ -60,7 +60,7 @@ class TypeSejour
      * Vérifie si le typeSejour existe déjà dans la base de données en fonction de l'id
      * @return boolean TRUE si l'option existe déjà, FALSE sinon
      */
-    function idExisteDeja()
+    public function idExisteDeja()
     {
         $requete        = 'SELECT * FROM typeSejour WHERE idType = ?';
         $tabParametres  = array($this->m_idType);
@@ -73,7 +73,7 @@ class TypeSejour
     /**
      * Fonction qui initialise l'idtype (elle sert quand on effectue un ajout et qu'on a toujours pas l'id de l'option)
      */
-    function initialiserId()
+    private function initialiserId()
     {
         if(empty($this->m_idType))
         {
@@ -88,7 +88,7 @@ class TypeSejour
      * Ajoute un type de sejour dans la table typeSejour a condition que celui ci n'existe pas déjà
      * @return boolean TRUE si l'ajout s'est bien déroulé, FALSE sinon (FALSE si le type de sejour existait déjà)
      */
-    function ajouterTypeSejour()
+    public function ajouterTypeSejour()
     {
         if(!$this->libelleExisteDeja())
         {
@@ -106,7 +106,7 @@ class TypeSejour
      * Modifie un type de sejour a condition que celui-ci existe dans la bdd
      * @return boolean TRUE si la modification s'est bien passée, FALSE sinon
      */
-    function modifiertypeSejour()
+    public function modifiertypeSejour()
     {
         $this->initialiserId();
         if($this->idExisteDeja())
@@ -122,7 +122,7 @@ class TypeSejour
      * Supprime un type de sejour s'il existe bien
      * @return boolean TRUE si la suppression s'est bien passée, FALSE sinon
      */
-    function supprimerTypeSejour()
+    public function supprimerTypeSejour()
     {
         $this->initialiserId();
         if($this->idExisteDeja())
@@ -155,18 +155,18 @@ class TypeSejour
         return $tabObjets;
     }
     
-    function getIdType()
+    public function getIdType()
     {
         $this->initialiserId();
         return $this->m_idType;
     }
     
-    function getLibelleType()
+    public function getLibelleType()
     {
         return $this->m_libelleType;
     }
     
-    function setLibelleType($libelleType)
+    public function setLibelleType($libelleType)
     {
         $ancienLibelle = $this->m_libelleType;
         $this->m_libelleType = $libelleType;
@@ -174,7 +174,7 @@ class TypeSejour
             $this->m_libelleType = $ancienLibelle;
     }
     
-    function __toString()
+    public function __toString()
     {
         $str  = '===TYPE_SEJOUR===<br/>';
         $str .= 'ID : '.$this->m_idType.' --- ';

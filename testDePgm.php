@@ -362,12 +362,18 @@ function testClasseReservationOptionHotel()
 
 
 //-------------------------------------------------------------------------------------------------------------------------//
-$where = "WHERE idType=?";
-$tabParametres = array(2);
+$where = "";
+$tabParametres = array();
 
-$tabObjets = TypeSejour::getObjetsTypeSejour($where, $tabParametres);
-foreach ($tabObjets as $typeSejour)
+$tabTypeSejour = TypeSejour::getObjetsTypeSejour($where, $tabParametres);
+foreach ($tabTypeSejour as $typeSejour)
     echo $typeSejour;
+
+
+$tabChambre = Chambre::getObjetsChambre($where, $tabParametres);
+foreach ($tabChambre as $chambre)
+    echo $chambre;
+
 
 //-------------------------------------------------------------------------------------------------------------------------//
 
