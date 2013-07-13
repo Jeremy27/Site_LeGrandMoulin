@@ -82,11 +82,11 @@ class Utilisateur {
     }
     /**
     * Setteur du groupe de l'utilisateur
-    * @param int $idGroupe Nouveau groupe de l'utilisateur
+    * @param GroupeUtilisateur $groupe Nouveau groupe de l'utilisateur
     */
-    public function setGroupeUtilisateur($idGroupe)
+    public function setGroupeUtilisateur($groupe)
     {
-        $this->m_groupeUtilisateur = new GroupeUtilisateur($idGroupe);
+        $this->m_groupeUtilisateur = $groupe;
     }
     
     /* ------------------------------------------------- Constructeurs ------------------------------------------------- */
@@ -120,14 +120,18 @@ class Utilisateur {
      * @param string $loginUtilisateur Login du nouvel utilisateur
      * @param string $mdpUtilisateur Mot de passe du nouvel utilisateur
      */
-    public function constructNew($loginUtilisateur, $mdpUtilisateur)
+    private function constructNew($loginUtilisateur, $mdpUtilisateur)
     {
         $this->m_loginUtilisateur = $loginUtilisateur;
         $this->m_mdpUtilisateur = $mdpUtilisateur;
         $this->m_groupeUtilisateur = new GroupeUtilisateur(2);
     }
     
-    // Constructeur
+    /**
+     * Constructeur de la classe
+     * Utilisateur provenant de la base de données: constructId($idUtilisateur)
+     * Nouvel utilisateur créé via les paramètres donnés: constructNew($loginUtilisateur, $mdpUtilisateur)
+     */
     public function __construct()
     {
         // Création de la connexion à la base de données
@@ -152,48 +156,115 @@ class Utilisateur {
      * Ajoute l'utilisateur dans la base de données
      * @return boolean Indiquant si l'ajout a bien été effectué ou pas
      */
-    function ajouterUtilisateur()
+    public function ajouterUtilisateur()
     {
-         $requete = 'INSERT INTO utilisateur (loginUtilisateur, mdpUtilisateur, idGroupe_groupeUtilisateur)
-                            VALUES (?, ?, ?)';
-         $tabParametres = array($this->m_loginUtilisateur, $this->m_mdpUtilisateur ,$this->m_groupeUtilisateur->getIdGroupe());
-         $ligne = $this->m_bdd->ajouter($requete, $tabParametres);
-         
-         return $ligne;
+        if(!$this->loginExisteDeja())
+        {
+            $requete = 'INSERT INTO utilisateur (loginUtilisateur, mdpUtilisateur, idGroupe_groupeUtilisateur)
+                               VALUES (?, ?, ?)';
+            $tabParametres = array($this->m_loginUtilisateur, $this->m_mdpUtilisateur ,$this->m_groupeUtilisateur->getIdGroupe());
+            $resultat = $this->m_bdd->ajouter($requete, $tabParametres);
+            if($resultat)
+                $this->initialiserId ();
+            return $resultat;
+        }
+        else
+            return FALSE;
     }
 
     /**
      * Modification de l'utilisateur dans la base de données
-     * @return boolean Indiquant si l'ajout a bien été effectué ou pas
+     * @return boolean Indiquant si la modification a bien été effectué ou pas
      */
-    function modifierUtilisateur()
+    public function modifierUtilisateur()
     {
-        $requete = 'UPDATE utilisateur
-                            SET loginUtilisateur = ?, mdpUtilisateur = ?, idGroupe_groupeUtilisateur = ?
-                            WHERE idUtilisateur = ?';
-        $tabParametres = array($this->m_loginUtilisateur, $this->m_mdpUtilisateur, $this->m_groupeUtilisateur->getIdGroupe(), $this->m_idUtilisateur);
-        
-        $ligne = $this->m_bdd->modifier($requete, $tabParametres);
-         if($ligne)
-             echo 'L\'utilisateur a bien été modifié !';
-         else
-             echo 'Un problème est survenu lors de la modification de l\'utilisateur !';
+        if($this->idExisteDeja())
+        {
+            $requete = 'UPDATE utilisateur
+                                SET loginUtilisateur = ?, mdpUtilisateur = ?, idGroupe_groupeUtilisateur = ?
+                                WHERE idUtilisateur = ?';
+            $tabParametres = array($this->m_loginUtilisateur, $this->m_mdpUtilisateur, $this->m_groupeUtilisateur->getIdGroupe(), $this->m_idUtilisateur);
+
+            $resultat = $this->m_bdd->modifier($requete, $tabParametres);
+
+            return $resultat;
+        }
+        else
+            return FALSE;
     }
     
     /**
      * Suppression de l'utilisateur dans la base de données
-     * @return boolean Indiquant si l'ajout a bien été effectué ou pas
+     * @return boolean Indiquant si la suppression a bien été effectué ou pas
      */
-    function supprimerUtilisateur()
+    public function supprimerUtilisateur()
     {
-        $requete = 'DELETE FROM utilisateur
+        if($this->idExisteDeja())
+        {
+            $requete = 'DELETE FROM utilisateur
+                                WHERE idUtilisateur = ?';
+            $tabParametres = array($this->m_idUtilisateur);
+
+            $resultat = $this->m_bdd->supprimer($requete, $tabParametres);
+
+            return $resultat;
+        }
+        else
+            return FALSE;
+    }
+    
+    /**
+     * Fonction qui vérifie si ce libelle de groupe existe déjà dans la base de données
+     * @return boolean Indiquant si le groupe existe ou pas
+     */
+    private function loginExisteDeja()
+    {
+        $requete = 'SELECT *
+                            FROM utilisateur
+                            WHERE loginUtilisateur = ?';
+        $tabParametres = array($this->m_loginUtilisateur);
+        
+        $resultat = $this->m_bdd->selection($requete, $tabParametres);
+        
+        if(empty($resultat))
+            return FALSE;
+        else
+            return TRUE;
+    }
+    
+    /**
+     * Fonction qui vérifie si l'utilisateur existe déjà dans la base de données
+     * @return boolean Indiquant si le groupe existe ou pas
+     */
+    private function idExisteDeja()
+    {
+        $requete = 'SELECT *
+                            FROM utilisateur
                             WHERE idUtilisateur = ?';
         $tabParametres = array($this->m_idUtilisateur);
         
-        $ligne = $this->m_bdd->supprimer($requete, $tabParametres);
+        $resultat = $this->m_bdd->selection($requete, $tabParametres);
         
-        return $ligne;
-    }  
+        if(empty($resultat))
+            return FALSE;
+        else
+            return TRUE;
+    }
+    
+    /**
+     * Fonction d'initialisation de l'id du groupe suite à l'ajout du groupe en base de données
+     */
+    private function initialiserId()
+    {
+        $requete = 'SELECT idUtilisateur
+                            FROM utilisateur
+                            WHERE loginUtilisateur = ?';
+        $tabParametres = array($this->m_loginUtilisateur);
         
+        $resultat = $this->m_bdd->selection($requete, $tabParametres);
+        $this->m_idUtilisateur = $resultat[0]['idUtilisateur'];
+        
+    }
+    
 }
 ?>

@@ -29,7 +29,7 @@ class GroupeUtilisateur
     }
     /**
     * Getteur du libelleGroupe
-    * @return int $this->libelleGroupe valeur du libelle du groupe
+    * @return string $this->libelleGroupe valeur du libelle du groupe
     */
     public function getLibelleGroupe()
     {
@@ -79,7 +79,11 @@ class GroupeUtilisateur
     }
 
 
-    // Constructeur
+    /**
+     * Constructeur de la classe
+     * Groupe provenant de la base de données: constructId($idGroupe)
+     * Nouveau Groupe créé via les paramètres donnés: constructNew($libelleGroupe)
+     */
     public function __construct()
     {
         // Création de la connexion à la base de données
@@ -107,13 +111,15 @@ class GroupeUtilisateur
      */
     public function ajouterGroupe()
     {
-        if(!$this->existeDeja())
+        if(!$this->libelleExisteDeja())
         {
             $requete = 'INSERT INTO groupeUtilisateur (libelleGroupe)
                                 VALUES (?)';
             $tabParametres = array($this->m_libelleGroupe);
 
             $resultat = $this->m_bdd->ajouter($requete, $tabParametres);
+            if($resultat)
+                $this->initialiserId ();
 
             return $resultat;
         }
@@ -123,19 +129,19 @@ class GroupeUtilisateur
     
     /**
      * Modification du groupe dans la base de données
-     * @return boolean Indiquant si l'ajout a bien été effectué ou pas
+     * @return boolean Indiquant si la modification a bien été effectué ou pas
      */
     public function modifierGroupe()
     {
-        if($this->existeDeja())
+        if($this->idExisteDeja())
         {
             $requete = 'UPDATE groupeUtilisateur
-                                SET (libelleGroupe = ?)
-                                WHERE idGroupe = ?)';
+                                SET libelleGroupe = ?
+                                WHERE idGroupe = ?';
             $tabParametres = array($this->m_libelleGroupe, $this->m_idGroupe);
 
             $resultat = $this->m_bdd->modifier($requete, $tabParametres);
-
+            var_dump($resultat);
             return $resultat;
         }
         else
@@ -144,11 +150,11 @@ class GroupeUtilisateur
     
     /**
      * Suppression du groupe dans la base de données
-     * @return boolean Indiquant si l'ajout a bien été effectué ou pas
+     * @return boolean Indiquant si la suppression a bien été effectué ou pas
      */
     public function supprimerGroupe()
     {
-        if($this->existeDeja())
+        if($this->idExisteDeja())
         {
             $requete = 'DELETE FROM groupeUtilisateur
                                 WHERE idGroupe = ?';
@@ -163,22 +169,56 @@ class GroupeUtilisateur
     }
     
     /**
-     * Fonction qui vérifie si le groupe existe déjà dans la base de données
+     * Fonction qui vérifie si ce libelle de groupe existe déjà dans la base de données
      * @return boolean Indiquant si le groupe existe ou pas
      */
-    function existeDeja()
+    private function libelleExisteDeja()
     {
         $requete = 'SELECT *
                             FROM groupeUtilisateur
-                            WHERE idGroupe = ? AND libelleGroupe = ?';
-        $tabParametres = array($this->m_idGroupe, $this->m_libelleGroupe);
+                            WHERE libelleGroupe = ?';
+        $tabParametres = array($this->m_libelleGroupe);
         
         $resultat = $this->m_bdd->selection($requete, $tabParametres);
         
         if(empty($resultat))
-            return TRUE;
-        else
             return FALSE;
+        else
+            return TRUE;
+    }
+    
+    /**
+     * Fonction qui vérifie si le groupe existe déjà dans la base de données
+     * @return boolean Indiquant si le groupe existe ou pas
+     */
+    private function idExisteDeja()
+    {
+        $requete = 'SELECT *
+                            FROM groupeUtilisateur
+                            WHERE idGroupe = ?';
+        $tabParametres = array($this->m_idGroupe);
+        
+        $resultat = $this->m_bdd->selection($requete, $tabParametres);
+        
+        if(empty($resultat))
+            return FALSE;
+        else
+            return TRUE;
+    }
+    
+    /**
+     * Fonction d'initialisation de l'id du groupe suite à l'ajout du groupe en base de données
+     */
+    private function initialiserId()
+    {
+        $requete = 'SELECT idGroupe
+                            FROM groupeUtilisateur
+                            WHERE libelleGroupe = ?';
+        $tabParametres = array($this->m_libelleGroupe);
+        
+        $resultat = $this->m_bdd->selection($requete, $tabParametres);
+        
+        $this->m_idGroupe = $resultat[0]['idGroupe'];
     }
 }
 
