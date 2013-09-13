@@ -1206,6 +1206,10 @@ ol.styled > li:before {
 /* You can link them with an @import or, better for webperf, just paste them here */
 
 /* @import url(my-styles.css); */
+header{
+    background-color: #121212;
+    color: #880000;
+}
 
 nav
 {
@@ -1213,9 +1217,8 @@ nav
     padding-bottom: 10px;
     padding-top: 10px;
     background-color: #121212;
-    border-bottom: 1px solid gray;
+    border-bottom: 2px solid #990000;
     border-top: 2px solid #990000;
-    color: white;
     font-weight: bold;
 }
 

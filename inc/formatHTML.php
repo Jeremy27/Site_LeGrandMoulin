@@ -22,20 +22,22 @@ function getEntete($cheminRacine="")
 function getMenu($cheminRacine="")
 {
     $menu = '
-        <header>
-            <div class="grid2-1">
-                <div><img src="'.$cheminRacine.'img/LGM.png" alt="lol"/></div>
-                <div>lol</div>
-            </div>
+        <header class="grid2-1">
+            <div><img src="'.$cheminRacine.'img/LGM.png" alt="lol"/></div>
+            <div><h2 class="txtcenter">R&eacute;servation</h2></div>
         </header>
 
-        <nav>
-            <a href="#">Hotel                </a>
-            <a href="#">Restaurant           </a>
-            <a href="#">La ville             </a>
-            <a href="#">Plan                 </a>
-            <a href="#">Contact              </a>
-            <a href="#">Se connecter         </a>
+        <nav class="grid2-1">
+            <div>
+                <a href="#">Hotel                </a>
+                <a href="#">Restaurant           </a>
+                <a href="#">La ville             </a>
+                <a href="#">Plan                 </a>
+                <a href="#">Contact              </a>
+            </div>
+            <div class="txtright">
+                <a href="#">Se connecter</a>
+            <div>
         </nav>  ';
     return $menu;
 }
