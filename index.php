@@ -11,7 +11,7 @@ echo getMenu();
 
 <script language="JavaScript">  
     <!-- debut  
-    alert(document.body.clientWidth);
+    //alert(document.body.clientWidth);
 </script>
 
 <section class="row txtcenter">

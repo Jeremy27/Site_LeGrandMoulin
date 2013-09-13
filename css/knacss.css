@@ -477,34 +477,6 @@ textarea {
 
 /* @import url(my-styles.css); */
 
-/*.menuHorizontal{
-    margin: 0;
-    padding: 0.1em 0.5em 0.1em 0;
-    list-style-type: none;
-    background-color: #222222;
-    height: 40px;
-    text-align: center;
-}
-
-.menuHorizontal li {
-    width: 5em;
-    height: 40px;
-    display: inline;
-}
-
-.menuHorizontal a {
-    color: #990000;
-    text-decoration: none;
-    height: 1.4em;
-    line-height: 1.4em;
-}
-
-.menuHorizontal a:hover {
-    background-color: #990000;
-    color: #222222;
-}*/
-
-
 nav
 {
     position: relative;
@@ -514,6 +486,7 @@ nav
     border-bottom: 1px solid gray;
     border-top: 2px solid #990000;
     color: white;
+    font-weight: bold;
 }
 
 nav a
@@ -530,8 +503,7 @@ nav a
 
 nav a:hover
 {
-    color: #222222;
-    background-color: lightgray;
+    background-color: #222222;
 }
 
 /* ----------------------------- */
