@@ -12,7 +12,7 @@ function getEntete($cheminRacine="")
                 <title>Le Grand Moulin</title>
 
 
-                <link rel="stylesheet" href="'.$cheminRacine.'css/knacss.css" />
+                <link rel="stylesheet" href="'.$cheminRacine.'css/knacss.css" media="all"/>
 
             </head>
             <body>';
@@ -22,32 +22,21 @@ function getEntete($cheminRacine="")
 function getMenu($cheminRacine="")
 {
     $menu = '
-        <nav class="top-bar">
-            <ul class="title-area">
-                <li class="name">
-                    <a href="#"><img src="'.$cheminRacine.'img/LGM.png" alt="Smiley face" width="240"/></a>
-                </li>
-                <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
-                <section class="top-bar-section">
-                    <ul class="left">
-                        <li class="divider"></li>
-                        <li><a href="#">Hotel</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">restaurant</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">La ville</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Plan</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Contact</a></li>
-                        <li class="divider"></li>
-                    </ul>
-                    <ul class="right">
-                        <li><a href="#">Se connecter</a></li>
-                    </ul>
-                </section>
-            </ul>
-        </nav> ';
+        <header>
+            <div class="grid2-1">
+                <div><img src="'.$cheminRacine.'/img/LGM.png" alt="lol"/></div>
+                <div>lol</div>
+            </div>
+        </header>
+
+        <nav>
+            <a href="#">Hotel                </a>
+            <a href="#">Restaurant           </a>
+            <a href="#">La ville             </a>
+            <a href="#">Plan                 </a>
+            <a href="#">Contact              </a>
+            <a href="#">Se connecter         </a>
+        </nav>  ';
     return $menu;
 }
 
