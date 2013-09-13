@@ -468,43 +468,6 @@ textarea {
 	}
 }
 
-/* ----------------------------- */
-/* ==own stylesheet              */
-/* ----------------------------- */
-
-/* Here should go your own CSS styles */
-/* You can link them with an @import or, better for webperf, just paste them here */
-
-/* @import url(my-styles.css); */
-
-nav
-{
-    position: relative;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    background-color: #121212;
-    border-bottom: 1px solid gray;
-    border-top: 2px solid #990000;
-    color: white;
-    font-weight: bold;
-}
-
-nav a
-{
-    text-decoration: none;
-    color: #880000;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-nav a:hover
-{
-    background-color: #222222;
-}
 
 /* ----------------------------- */
 /* ==grids                       */
@@ -1232,4 +1195,43 @@ ol.styled > li:before {
 	}
 	/* margins for tiny (t) screens */
 	.tiny-ma0 { margin: 0 !important; }
+}
+
+
+/* ----------------------------- */
+/* ==own stylesheet              */
+/* ----------------------------- */
+
+/* Here should go your own CSS styles */
+/* You can link them with an @import or, better for webperf, just paste them here */
+
+/* @import url(my-styles.css); */
+
+nav
+{
+    position: relative;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    background-color: #121212;
+    border-bottom: 1px solid gray;
+    border-top: 2px solid #990000;
+    color: white;
+    font-weight: bold;
+}
+
+nav a
+{
+    text-decoration: none;
+    color: #880000;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+nav a:hover
+{
+    background-color: #222222;
 }
