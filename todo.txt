@@ -1,0 +1,21 @@
+----Accueil----
+page présentation
+modif admin
+
+----Hotel----
+carousel
+présentation chambre (tableau)
+réservation
+modif chambre
+
+
+----Restaurant----
+carousel
+menu
+
+
+----La ville----
+
+----Contact----
+
+----Connexion----
