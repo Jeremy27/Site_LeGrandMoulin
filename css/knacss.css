@@ -1206,7 +1206,7 @@ ol.styled > li:before {
 /* You can link them with an @import or, better for webperf, just paste them here */
 
 /* @import url(my-styles.css); */
-header{
+header {
     background-color: #121212;
     color: #880000;
 }
@@ -1215,7 +1215,7 @@ div.test {
     margin-top: 30px; 
 }
 
-.reservation{
+.reservation {
     background-color: #880000;
     color: #121212;
     padding-left: 15px;

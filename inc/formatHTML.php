@@ -23,12 +23,12 @@ function getEntete($cheminRacine="")
 function getMenu($cheminRacine="")
 {
     $menu = '
-        <header class="grid2-1">
+        <header class="grid3-1">
             <div><img src="'.$cheminRacine.'img/LGM.png" alt="lol"/></div>
             <div class="txtcenter test"><a class="reservation" href="#">R&eacute;server en ligne</a></div>
         </header>
 
-        <nav class="grid2-1">
+        <nav class="grid3-1">
             <div>
                 <a href="#">Hotel                </a>
                 <a href="#">Restaurant           </a>
