@@ -13,7 +13,8 @@ function getEntete($cheminRacine="")
 
 
                 <link rel="stylesheet" href="'.$cheminRacine.'css/knacss.css" media="all"/>
-
+                <link rel="stylesheet" href="'.$cheminRacine.'owl-carousel/owl.carousel.css" media="all"/>
+                <link rel="stylesheet" href="'.$cheminRacine.'owl-carousel/owl.theme.css" media="all"/>
             </head>
             <body>';
     return $entete;
