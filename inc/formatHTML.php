@@ -25,7 +25,7 @@ function getMenu($cheminRacine="")
     $menu = '
         <header class="grid2-1">
             <div><img src="'.$cheminRacine.'img/LGM.png" alt="lol"/></div>
-            <div><h2 class="txtcenter">R&eacute;servation</h2></div>
+            <div class="txtcenter test"><a class="reservation" href="#">R&eacute;server en ligne</a></div>
         </header>
 
         <nav class="grid2-1">
