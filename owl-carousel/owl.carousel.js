@@ -950,7 +950,7 @@ if ( typeof Object.create !== "function" ) {
 				base.playDirection = "next"
 			} else {
 				direction = "left"
-				base.playDirection = "prev"
+				base.playDirection = "précédent"
 			}
 			return direction
 		},

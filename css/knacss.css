@@ -12,8 +12,8 @@ html {
 	font-size: 62.5%;
 }
 body {
-	background-color: #fff;
-	color: #000;
+	background-color: #C0C0C0;;
+	color: #880000;
 	font-family: helvetica, arial, sans-serif;
 	font-size: 1.4em; /* equiv 14px */
 	line-height: 1.5; /* adapt to your design */
@@ -1253,4 +1253,8 @@ nav a
 nav a:hover
 {
     background-color: #222222;
+}
+
+.lorem{
+    margin-bottom: 100px;
 }
