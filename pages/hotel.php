@@ -37,19 +37,72 @@ echo getMenu('../');
     
     <!-- ---------------------------------------------------------------------- Appel des fichiers javascript nécésssaire au bon fonctionnement du carousel ---------------------------------------------------------------------- -->
 <section class="txtcenter" id="owl-demo" class="owl-carousel owl-theme">
-    <aside class="item">trou du cul de jérémy</aside>
-    <aside class="item">jérémy jérémy </aside>
+    <aside class="item"><img src="../img/fullimage1.jpg" alt="Mirror Edge"></aside>
+    <aside class="item"><img src="../img/fullimage2.jpg" alt="Mirror Edge"></aside>
     <aside class="item"><img src="../img/fullimage3.jpg" alt="Mirror Edge"></aside>
 </section>
+    
+    
+<section>    
+    <table>
+        <!-- ---------------------------- Titre des colonnes ---------------------------- -->
+        <tr>
+            <th>
 
-<div class="lorem">
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
-</div>
+            </th>
+            <th class="txtcenter">
+                Salle de bain 
+            </th>
+            <th class="txtcenter">
+                WC
+            </th>
+            <th class="txtcenter">
+                Capacité
+            </th>
+            <th class="txtcenter">
+                Tarif
+            </th>
+        </tr>
+        <!-- ---------------------------- Chambre 1 ---------------------------- -->
+        <tr>
+            <td>
+                chambre 1
+            </td>
+            <td>
+
+            </td>
+            <td>
+
+            </td>
+            <td>
+
+            </td>
+            <td>
+
+            </td>
+        </tr>
+        <!-- ---------------------------- Chambre 2 ---------------------------- -->
+        <tr>
+            <td>
+                njojklj
+            </td>
+            <td>
+                kljkjljkl
+            </td>
+            <td>
+                kljkljlkj
+            </td>
+            <td>
+                kljjljlk
+            </td>
+            <td>
+                kljjklj
+            </td>
+        </tr>
+    </table>
+</section>
+
+
 
     
     
