@@ -12,10 +12,19 @@ modif chambre
 ----Restaurant----
 carousel
 menu
-
+administration
 
 ----La ville----
+carousel photo
+présentation
+description activitées
+lien site
 
 ----Contact----
+formulaire
+plan accès
 
 ----Connexion----
+formulaire inscription
+formulaire connexion
+verif
