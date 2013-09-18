@@ -1,5 +1,7 @@
 <?php
 
+include_once 'baseDeDonnees.class.php';
+
 /**
  * Description of chambre
  *
@@ -152,7 +154,7 @@ class Chambre
      * @param tableau $tabParametres (exemple : array(2))
      * @return Chambre[]
      */
-    static function getObjetsChambre($where, $tabParametres)
+    static function getObjetsChambre($where="", $tabParametres=null)
     {
         $bdd        = new BaseDeDonnees();
         $requete    = 'SELECT idChambre FROM chambre '.$where;

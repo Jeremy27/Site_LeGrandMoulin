@@ -144,6 +144,27 @@ class OptionHotel
     }
     
     /**
+     * Méthode permettant de renvoyer un tableau d'objets de type OptionHotel en fonction des conditions passées en parametre 
+     * @param String $where (exemple : "WHERE idOptionHotel=?")
+     * @param tableau $tabParametres (exemple : array(2))
+     * @return OptionHotel[]
+     */
+    static function getObjetsOptionHotel($where="", $tabParametres=null)
+    {
+        $bdd        = new BaseDeDonnees();
+        $requete    = 'SELECT idOption FROM optionHotel '.$where;
+        $tabRes     = $bdd->selection($requete, $tabParametres);
+        $tabObjets  = array();
+        
+        for($i=0; $i<count($tabRes); $i++)
+            $tabObjets[$i] = new OptionHotel($tabRes[$i]['idOption']);
+        
+        if(empty($tabObjets))
+            return NULL;
+        return $tabObjets;
+    }
+    
+    /**
      * Retourne l'id de l'option courant, si celui-ci n'etait pas initialisé alors on récupère l'id dans la bdd
      * @return int l'id de l'option 
      */

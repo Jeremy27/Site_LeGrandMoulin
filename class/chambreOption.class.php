@@ -90,7 +90,7 @@ class ChambreOption
      * @param tableau $tabParametres (exemple : array(1, 1))
      * @return ChambreOption[]
      */
-    static function getObjetsChambreOption($where, $tabParametres)
+    static function getObjetsChambreOption($where="", $tabParametres=null)
     {
         $bdd        = new BaseDeDonnees();
         $requete    = 'SELECT * FROM chambreOption '.$where;

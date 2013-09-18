@@ -370,7 +370,7 @@ foreach ($tabTypeSejour as $typeSejour)
     echo $typeSejour;
 
 
-$tabChambre = Chambre::getObjetsChambre($where, $tabParametres);
+$tabChambre = Chambre::getObjetsChambre();
 foreach ($tabChambre as $chambre)
     echo $chambre;
 
