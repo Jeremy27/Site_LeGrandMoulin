@@ -25,10 +25,10 @@ function getMenu($cheminRacine="")
     $menu = '
         <header class="row txtcenter">
             <div class="col w75"><img src="'.$cheminRacine.'img/LGM.png" alt="lol"/></div>
-            <div class="col w25"><div class="test"><a class="reservation" href="#">R&eacute;server en ligne</a></div></div>
+            <div class="col w25"><div class="btnReservation"><a class="reservation" href="#">R&eacute;server en ligne</a></div></div>
         </header>
 
-        <nav class="row">
+        <nav class="row menuPrincipal">
             <div class="col w75">
                 <a href="#">Hotel                </a>
                 <a href="#">Restaurant           </a>
@@ -39,6 +39,17 @@ function getMenu($cheminRacine="")
             <div class="col w25 txtright">
                 <a href="#">Se connecter</a>
             <div>
+        </nav>  
+        
+        <nav class="row menuAdmin">
+            <div class="col w10">
+                Administration <span class="icon icon-arrow2" href="#"></span>
+            </div>
+            <div class="col w90">
+                <a href="#">Gestion hotel                </a>
+                <a href="#">Gestion restaurant           </a>
+                <a href="#">Gestion r&eacute;servations  </a>
+            </div>
         </nav>  ';
     return $menu;
 }
