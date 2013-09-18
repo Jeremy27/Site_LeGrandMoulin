@@ -159,6 +159,27 @@ class Reservation
         return FALSE;
     }
     
+    /**
+     * Méthode permettant de renvoyer un tableau d'objets de type Reservation en fonction des conditions passées en parametre 
+     * @param String $where (exemple : "WHERE idReservation=?")
+     * @param tableau $tabParametres (exemple : array(2))
+     * @return Chambre[]
+     */
+    static function getObjetsReservation($where="", $tabParametres=null)
+    {
+        $bdd        = new BaseDeDonnees();
+        $requete    = 'SELECT idReservation FROM reservation '.$where;
+        $tabRes     = $bdd->selection($requete, $tabParametres);
+        $tabObjets  = array();
+        
+        for($i=0; $i<count($tabRes); $i++)
+            $tabObjets[$i] = new Reservation($tabRes[$i]['idReservation']);
+        
+        if(empty($tabObjets))
+            return NULL;
+        return $tabObjets;
+    }
+    
     function getIdReservation()
     {
         $this->initialiserId();
