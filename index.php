@@ -1,11 +1,9 @@
 <?php 
-$chemin = 'inc/';
-include_once $chemin.'formatHTML.php';
-?>
+    $chemin = 'inc/';
+    include_once $chemin.'formatHTML.php';
 
-<?php   
-echo getEntete();
-echo getMenu();
+    echo getEntete();
+    echo getMenu();
 ?>
 
 

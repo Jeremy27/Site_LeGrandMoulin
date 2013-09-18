@@ -43,7 +43,7 @@ function getMenu($cheminRacine="")
         
         <nav class="row menuAdmin">
             <div class="col w10">
-                Administration <span class="icon icon-arrow2" href="#"></span>
+                Administration
             </div>
             <div class="col w90">
                 <a href="#">Gestion hotel                </a>
