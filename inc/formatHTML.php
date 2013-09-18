@@ -23,9 +23,9 @@ function getEntete($cheminRacine="")
 function getMenu($cheminRacine="")
 {
     $menu = '
-        <header class="row">
+        <header class="row txtcenter">
             <div class="col w75"><img src="'.$cheminRacine.'img/LGM.png" alt="lol"/></div>
-            <div class="col w25 txtcenter"><a class="reservation" href="#">R&eacute;server en ligne</a></div>
+            <div class="col w25"><div class="test"><a class="reservation" href="#">R&eacute;server en ligne</a></div></div>
         </header>
 
         <nav class="row">

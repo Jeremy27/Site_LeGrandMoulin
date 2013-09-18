@@ -1211,14 +1211,28 @@ header {
     color: #880000;
 }
 
-.reservation {
-    background-color: #202020;
-    font-weight: bold;
-    color: #880000;
-    text-decoration: none;
-    margin-bottom: 0px;
+.test {
+    margin-top: 16px;
 }
 
+.reservation {
+    background-color: lightgray;
+    font-weight: bold;
+    color: #880000;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border-radius: 0px 0px 20px 20px;
+    border: 2px solid #880000;
+    border-top: 0px;
+    text-decoration: none;
+    font-size: large;
+}
+
+.reservation:hover {
+    background-color: #C0C0C0;
+}
 
 nav {
     position: relative;
