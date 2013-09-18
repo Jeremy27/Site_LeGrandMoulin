@@ -1247,10 +1247,7 @@ nav {
 nav a {
     text-decoration: none;
     color: #880000;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 10px;
-    padding-top: 10px;
+    padding: 10px 15px 10px 15px;
     margin-left: 10px;
     margin-right: 10px;
 }
